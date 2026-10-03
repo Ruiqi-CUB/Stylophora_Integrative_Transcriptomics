@@ -1,6 +1,6 @@
 # 07. Deconvolution and neuron-specific analysis
 
-Sources: `03_prep_instaprism.R`, `05_prep_bulk_input.R`, `01_InstaPrism.R`, `01b_Savary2021_InstaPrism.R`, `02_ICN_36v30_neuron_analysis.R`, `02b_Savary2021_neuron_analysis.R`, `04_3pop_36v30_neuron_analysis.R`, and `05_method_comparison.R`.
+Single-cell reference profiles were used to deconvolve bulk expression and test neuronal responses.
 
 ## 1. Prepare scRNA and bulk inputs
 

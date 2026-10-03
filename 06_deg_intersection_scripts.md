@@ -1,6 +1,6 @@
 # 06. Bulk DEG lists and neuron intersections
 
-Sources: `01_generate_scRNA_distributions.R`, `02_build_voolstra2020_DEG_lists.R`, `03_build_savary2021_DEG_lists.R`, `05_intersect_neuron_DEG.R`, `06_add_annotations.R`, and `run_all.sh`. `04_build_conserved_DEG_list.R` is empty.
+Bulk heat-response sets were intersected with the two neuronal gene sets.
 
 ## 1. Summarize the two scRNA neuron lists
 
@@ -8,7 +8,7 @@ Sources: `01_generate_scRNA_distributions.R`, `02_build_voolstra2020_DEG_lists.R
 
 ## 2. Construct Voolstra 2020 heat-response lists
 
-From `02_build_voolstra2020_DEG_lists.R`, input files are the four prefiltered 36°C vs 30°C lists: `ICN`, `AFR`, `ETR`, and `PTR`. Direction is defined as `up` when `log2FC > 0`, otherwise `down`.
+Input files are the four prefiltered 36°C vs 30°C lists: `ICN`, `AFR`, `ETR`, and `PTR`. Direction is `up` when `log2FC > 0`, otherwise `down`.
 
 ```r
 nonpreloaded <- all_degs %>%

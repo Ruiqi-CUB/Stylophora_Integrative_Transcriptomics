@@ -1,6 +1,6 @@
 # 08. Visualization and manuscript statistics
 
-Sources: `01_cluster_plots.R`, `02_dotplot.R`, `03_boxplots.R`, `04_deconvolution_boxplots.R`, `01_gene_extension_stats.py`, `02_bulk_rnaseq_qc_summary.py`, `02b_bulk_rnaseq_qc_fast.py`, `03_upset_bulk_x_neuron.R`, `04_upset_final_candidates.R`, `04a_upset_voolstra_internal.R`, `04b_upset_savary_internal.R`, `04c_upset_cross_study_extreme.R`, `05_generate_stats_summary.R`, `05_upset_neuron_lists.R`, `06_cell_fraction_stats.R`, `07_candidate_heatmap_v3.R`, `Neuro_DEG_data2boxplots.R`, and `expr_boxplot.R`.
+This section summarizes extension statistics, QC, candidate-gene plots, set overlaps, and cell-fraction tests.
 
 ## 1. Extension and bulk QC summaries
 

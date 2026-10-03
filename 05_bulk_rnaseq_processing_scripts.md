@@ -1,10 +1,10 @@
 # 05. Bulk RNA-seq processing
 
-Sources: `Voolstra2020_Trim.slurm`, `Voolstra2021_FastQC.slurm`, `Voolstra2020_StyPis_featureCounts_gene.slurm`, `Voolstra2020_gene_DEG.slurm`, `Savary_Trim.slurm`, `Savary2021_FastQC.slurm`, `Savary2021_HISAT2_New.slurm`, `Savary2021_featureCounts_gene.slurm`, and `Savary2021_gene_DEG.slurm`. `Voolstra2021_HISAT2.slurm` is empty.
+Bulk reads were trimmed, quality checked, counted, normalized, and tested for differential expression.
 
 ## 1. Trim paired-end reads and assess QC
 
-The Voolstra (83-array task) and Savary (80-array task) scripts used the same Trimmomatic settings, with input sample names read from their respective sample lists:
+Voolstra and Savary reads used the same Trimmomatic settings:
 
 ```bash
 trimmomatic PE -threads <threads> -phred33 \

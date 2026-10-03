@@ -1,12 +1,10 @@
 # 01. Reference extension and scRNA reference
 
-Source scripts: `01_star_index.slurm`, `02_star_map.slurm`, `03_macs2.slurm`, `04_extend3pR.slurm`, `qsub_extend3p.R`, `mkref_StyPis_SymMic.slurm`, and `cellranger_count_StyPis_SymMic.slurm`.
-
-The commands below document the 3′ extension workflow and construction/use of the combined host–symbiont Cell Ranger reference. They omit scheduler directives and local paths.
+Key commands for 3′ extension and the combined host–symbiont Cell Ranger reference.
 
 ## 1. Build a STAR genome index
 
-From `01_star_index.slurm`, a STAR index was made from the masked host genome and the original Cell Ranger-compatible annotation:
+A STAR index was made from the masked host genome and original annotation:
 
 ```bash
 STAR --runThreadN <threads> --runMode genomeGenerate \
@@ -21,7 +19,7 @@ STAR --runThreadN <threads> --runMode genomeGenerate \
 
 ## 2. Map pooled 10X read 2 sequences for 3′ peak discovery
 
-From `02_star_map.slurm`, all unique `*_R2_*` FASTQs listed in `list_Stylophora_10XscRNAseq.txt` were comma-joined and mapped:
+Pooled 10X read 2 FASTQs were mapped:
 
 ```bash
 STAR --genomeDir StyPis_STAR_index --runThreadN <threads> \
@@ -34,11 +32,9 @@ STAR --genomeDir StyPis_STAR_index --runThreadN <threads> \
   --outSAMattributes Standard
 ```
 
-The exact FASTQ membership of `<pooled_R2_FASTQs.csv>` is not contained in the script bundle.
-
 ## 3. Call strand-aware broad peaks
 
-From `03_macs2.slurm`, the coordinate-sorted BAM was separated by read strand. Effective genome size was calculated as 90% of the summed STAR chromosome lengths. MACS2 peaks were then called independently on each strand:
+Reads were separated by strand and peaks called using an effective genome size of 90% of the summed chromosome lengths:
 
 ```bash
 sambamba view -f bam --filter "strand=='+'" -t <threads> \
@@ -60,7 +56,7 @@ The plus and minus `broadPeak` outputs were combined after setting column 6 to `
 
 ## 4. Extend gene models to 3′ peaks
 
-`04_extend3pR.slurm` called the bundled `qsub_extend3p.R` implementation:
+Genes were extended to qualifying 3′ peaks:
 
 ```bash
 Rscript qsub_extend3p.R \
@@ -72,11 +68,11 @@ Rscript qsub_extend3p.R \
 
 From `qsub_extend3p.R`, peaks are imported as ranges, filtered at MACS2 q-value `<= 0.001`, and assigned strand-specifically to downstream gene ends when within 5,000 bp. Overlapping end peaks are unioned with a gene; the most distant qualifying downstream orphan peak is used per gene. `-a` retains unassigned peaks as orphan genes prefixed `StyPis`. The optional 5′-overlap trimming flag was not used.
 
-The wrapper calls its output `extend_StyPis_genes.gtf`; later scripts use `StyPis_GeneExt.gtf`. The rename/conversion between these named files is not shown.
+The extension output is later used as `StyPis_GeneExt.gtf`.
 
 ## 5. Build the combined Cell Ranger reference
 
-From `mkref_StyPis_SymMic.slurm` (Cell Ranger 10.0.0):
+Cell Ranger 10.0.0 built the combined reference:
 
 ```bash
 cellranger mkref --genome=StyPis_SymMic_CR \
@@ -88,7 +84,7 @@ The script establishes that `StyPis_SymMic.fna` is a combined host–symbiont FA
 
 ## 6. Generate the single-cell count matrix
 
-From `cellranger_count_StyPis_SymMic.slurm` (Cell Ranger 10.0.0), two runs of the same GSM library were jointly processed:
+Two runs from the same GSM library were jointly processed:
 
 ```bash
 cellranger count --id=StyPis_SymMic_GSM8793941 \
@@ -98,4 +94,4 @@ cellranger count --id=StyPis_SymMic_GSM8793941 \
   --localcores=<threads> --localmem=150
 ```
 
-The run identifiers are stated in the source comments as `SRR32332770` and `SRR32332771`; exact FASTQ directory contents are not provided.
+The input runs were `SRR32332770` and `SRR32332771`.

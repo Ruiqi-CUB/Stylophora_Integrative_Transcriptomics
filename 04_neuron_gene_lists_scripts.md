@@ -1,7 +1,5 @@
 # 04. Neuron gene lists
 
-Source script: `02_neuron_gene_lists.R`.
-
 ## 1. Define neuronal cells
 
 ```r

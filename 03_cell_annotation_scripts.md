@@ -1,6 +1,6 @@
 # 03. Cell-type annotation
 
-Sources: `deduplicate_old_genome.py`, `extract_proteins.py`, `run_orthofinder.sh`, `step1_filter_markers.R`, `step2_find_orthologs.R`, `step4_create_plots.R`, `bottom_up_analysis.R`, `create_annotations.R`, and `01_add_cell_annotations.R`. `step3_build_gene_lists.R` is empty.
+Orthology and keyword-based annotation supported the final cluster labels.
 
 ## 1. Prepare old and new genome protein sets
 

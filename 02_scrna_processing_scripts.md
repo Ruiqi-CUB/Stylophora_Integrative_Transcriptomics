@@ -1,6 +1,6 @@
 # 02. scRNA-seq processing
 
-Source script: `01_StyPis_scRNA.R`. Analysis used Seurat; the exact installed Seurat version is unavailable.
+Analysis used Seurat.
 
 ## 1. Create and quality-filter the Seurat object
 
